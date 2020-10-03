@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from './../recipe.service';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -33,5 +34,10 @@ export class RecipeDetailComponent implements OnInit {
 
   onEditRecipe(): void {
     this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  onDeleteRecipe(): void {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['recipes']);
   }
 }

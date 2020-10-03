@@ -1,5 +1,6 @@
 .item-content {
   display: flex;
+  justify-content: space-between;
 }
 
 .item-content img {
