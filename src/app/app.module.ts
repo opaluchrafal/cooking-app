@@ -12,16 +12,11 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { PlaceholderDirective } from './shared/directives/placeholder.directive';
 import { HeaderComponent } from './header/header.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeService } from './recipes/recipe.service';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipesModule } from './recipes/recipes.module';
 
 @NgModule({
   declarations: [
@@ -32,12 +27,6 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     PlaceholderDirective,
     HeaderComponent,
     LoadingSpinnerComponent,
-    RecipeDetailComponent,
-    RecipeEditComponent,
-    RecipeItemComponent,
-    RecipeListComponent,
-    RecipesComponent,
-    RecipeStartComponent,
     ShoppingEditComponent,
     ShoppingListComponent
   ],
@@ -46,7 +35,8 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RecipesModule
   ],
   providers: [
     ShoppingListService,
