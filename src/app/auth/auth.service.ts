@@ -6,6 +6,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { User } from './user.model';
+import { environment } from '../../environments/environment';
 
 export interface AuthResponseData {
   kind: string;
@@ -17,30 +18,31 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
-@Injectable( {providedIn: 'root'} )
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(email: string, password: string): Observable<any> {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxEKl-iIvUApw-jN8arAgTbM27EOGSUG4', {
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey, {
       email: email,
       password: password,
       returnSecureToken: true
     })
-    .pipe(
-      catchError(this.handleError),
-      tap(resData => {
-        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-      })
-    );
+      .pipe(
+        catchError(this.handleError),
+        tap(resData => {
+          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+        })
+      );
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCxEKl-iIvUApw-jN8arAgTbM27EOGSUG4', {
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
+      + environment.firebaseAPIKey, {
       email: email,
       password: password,
       returnSecureToken: true
